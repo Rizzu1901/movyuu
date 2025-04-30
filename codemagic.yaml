@@ -1,4 +1,3 @@
-
 workflows:
   android-native:
     name: Build Movy Native Android App
@@ -7,9 +6,15 @@ workflows:
       vars:
         GRADLE_TASK: "assembleRelease"
     scripts:
-      - name: Make gradlew executable and build APK
+      - name: Fix permissions and build APK
         script: |
-          chmod +x gradlew
+          echo "Setting gradlew as executable..."
+          chmod +x ./gradlew
+          echo "Running Gradle build..."
           ./gradlew $GRADLE_TASK
     artifacts:
-      - app/build/outputs/**/*.apk
+      - app/build/outputs//*.apk
+    publishing:
+      email:
+        recipients:
+          - syedrizwan003@gmail.com 
