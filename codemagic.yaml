@@ -1,0 +1,15 @@
+
+workflows:
+  android-native:
+    name: Build Movy Native Android App
+    max_build_duration: 60
+    environment:
+      vars:
+        GRADLE_TASK: "assembleRelease"
+    scripts:
+      - name: Make gradlew executable and build APK
+        script: |
+          chmod +x gradlew
+          ./gradlew $GRADLE_TASK
+    artifacts:
+      - app/build/outputs/**/*.apk
